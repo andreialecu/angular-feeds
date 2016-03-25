@@ -1,5 +1,5 @@
 /**
- * angular-feeds - v0.0.5 - 2016-03-24 5:24 PM
+ * angular-feeds - v0.0.5 - 2016-03-25 3:53 PM
  * https://github.com/siddii/angular-feeds
  *
  * Copyright (c) 2016 
@@ -20,6 +20,10 @@ angular.module('feeds-directives', []).directive('feed', ['feedService', '$compi
         }
       });
 
+      $transclude($scope, function(transEl) {
+        $element.append(transEl);
+      });
+
       $scope.feeds = [];
 
       function refreshFeed(url) {
@@ -32,9 +36,7 @@ angular.module('feeds-directives', []).directive('feed', ['feedService', '$compi
             }
           }
 
-          $transclude($scope, function(transEl) {
-            $element.append(transEl);
-          });
+
         }, function(error) {
           console.error('Error loading feed ', error);
           $scope.error = error;

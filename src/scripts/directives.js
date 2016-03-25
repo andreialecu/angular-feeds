@@ -13,6 +13,10 @@ angular.module('feeds-directives', []).directive('feed', ['feedService', '$compi
         }
       });
 
+      $transclude($scope, function(transEl) {
+        $element.append(transEl);
+      });
+
       $scope.feeds = [];
 
       function refreshFeed(url) {
@@ -25,9 +29,7 @@ angular.module('feeds-directives', []).directive('feed', ['feedService', '$compi
             }
           }
 
-          $transclude($scope, function(transEl) {
-            $element.append(transEl);
-          });
+
         }, function(error) {
           console.error('Error loading feed ', error);
           $scope.error = error;
